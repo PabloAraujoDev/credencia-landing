@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://pabloaraujodev.github.io/credencia-landing/sitemap.xml
