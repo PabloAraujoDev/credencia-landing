@@ -59,7 +59,8 @@ const headExtra = [
 let html = await readFile(path.join(dist, 'index.html'), 'utf8')
 if (!html.includes('<!--app-->')) throw new Error('Marcador <!--app--> não encontrado em dist/index.html')
 html = html.replace('<!--app-->', appHtml).replace('<!--head-extra-->', headExtra)
-html = html.replace('content="/og-image.png"', siteUrl ? `content="${siteUrl}/og-image.png"` : `content="${base}og-image.png"`)
+// O Vite já pode ter prefixado a base; redes sociais exigem URL absoluta
+html = html.replace(/content="[^"]*og-image\.png"/, siteUrl ? `content="${siteUrl}/og-image.png"` : `content="${base}og-image.png"`)
 await writeFile(path.join(dist, 'index.html'), html)
 
 // robots.txt e sitemap.xml
